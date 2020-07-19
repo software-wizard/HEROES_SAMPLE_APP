@@ -2,25 +2,29 @@ package pl.sdk.gui;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class CreatureTest {
 
     @Test
     void defenderShouldLost2HpBecauseOfArmor(){
-        // PLEASE IMPLEMENT ME!
-        // STOP USE system.out.printLn("my value: " + your_variable)
-        // STOP USE debugger for checking values - it's for finding bugs
-        // STOP RUNNING your application for checking new functionality
-
-        // UNIT TEST IS MUCH BETTER SOLUTION :)
+        //given
+        Creature student = new Creature(1,1, 1, "Student",1);
+        Creature professor = new Creature(1000,500, 500, "Professor",11);
+        //when
+        professor.attack(student);
+        //then
+        assertEquals(-498, student.getCurrentHp());
     }
 
     @Test
     void defenderShouldLost0HpBecauseArmorIsGraterThanAttackerDamage(){
-        // PLEASE IMPLEMENT ME!
-        // STOP USE system.out.printLn("my value: " + your_variable)
-        // STOP USE debugger for checking values - it's for finding bugs
-        // STOP RUNNING your application for checking new functionality
-
-        // UNIT TEST IS MUCH BETTER SOLUTION :)
+        //given
+        Creature student = new Creature(1,1, 1, "Student",1);
+        Creature professor = new Creature(1000,500, 500, "Professor",11);
+        //when
+        student.attack(professor);
+        //then
+        assertEquals(1000, professor.getCurrentHp());
     }
 }
