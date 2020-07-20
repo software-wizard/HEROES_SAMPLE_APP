@@ -26,10 +26,11 @@ Idziesz do klasy start i klikasz play xd.
 Sensowna implementacja zaczyna się w klasie **MainBattleController**
 
 ## Proponowane zadania na start:
-##### Zadanie 1
+##### Zadanie 1 -> to omówiliśmy sobie na vlogu https://youtu.be/XALms1iNA9Y - sorry za jakość, ale dopiero uczę się w montowanie, vlogowanie itd. DONE IS BETTER THAN PERFECT!
 Dodaj jednostką pancerz. Nowy algorytm ataku: Obrażenia = atak - pancerz
 Nie dopuśc do sytuacji by punkty życia jednostki atakowanej wzrosły (pancerz obrońcy większy niż atak agresora).
 
+### Z resztą radź sobie sam :P POWODZENIA!
 ##### Zadanie 2
 Spraw by atakowana jednostka oddawała.
 
