@@ -28,11 +28,14 @@ public class Creature {
             damageToDeal = considerElementalMechanic(aDefender, this, damageToDeal);
             applyDamage(aDefender, damageToDeal);
 
-            if (canCounterAttack(aDefender)) {
-                int damageToDealInCounterAttack = countDamageToDeal(this, aDefender);
-                damageToDealInCounterAttack = considerElementalMechanic(this, aDefender, damageToDealInCounterAttack);
-                applyDamage(this, damageToDealInCounterAttack);
-                aDefender.counterAttack=true;
+            if(!(this instanceof ShootingCreature)){
+
+                if (canCounterAttack(aDefender)) {
+                    int damageToDealInCounterAttack = countDamageToDeal(this, aDefender);
+                    damageToDealInCounterAttack = considerElementalMechanic(this, aDefender, damageToDealInCounterAttack);
+                    applyDamage(this, damageToDealInCounterAttack);
+                    aDefender.counterAttack=true;
+                }
             }
         }
     }

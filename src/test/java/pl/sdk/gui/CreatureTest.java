@@ -31,7 +31,7 @@ public class CreatureTest {
     @Test
     void shouldNotCounterAttackWhenAttackerIsShooter(){
         //given
-        Creature attacker = new Creature(100,1, 1, "Student",1,100);
+        Creature attacker = new ShootingCreature(100,1, 1, "Student",1,100);
         Creature defender = new Creature(100,10, 1, "Student",1,100);
         //when
         attacker.attack(defender);
