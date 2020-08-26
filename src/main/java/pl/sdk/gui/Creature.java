@@ -28,12 +28,16 @@ public class Creature {
             damageToDeal = considerElementalMechanic(aDefender, this, damageToDeal);
             applyDamage(aDefender, damageToDeal);
 
-            if (canCounterAttack(aDefender)) {
-                int damageToDealInCounterAttack = countDamageToDeal(this, aDefender);
-                damageToDealInCounterAttack = considerElementalMechanic(this, aDefender, damageToDealInCounterAttack);
-                applyDamage(this, damageToDealInCounterAttack);
-                aDefender.counterAttack=true;
-            }
+            ca(aDefender);
+        }
+    }
+
+    protected void ca(Creature aDefender) {
+        if (canCounterAttack(aDefender)) {
+            int damageToDealInCounterAttack = countDamageToDeal(this, aDefender);
+            damageToDealInCounterAttack = considerElementalMechanic(this, aDefender, damageToDealInCounterAttack);
+            applyDamage(this, damageToDealInCounterAttack);
+            aDefender.counterAttack = true;
         }
     }
 
@@ -97,9 +101,9 @@ public class Creature {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         String[] splitName = name.split(" ");
-        for (int i = 0; i < splitName.length; i++){
+        for (int i = 0; i < splitName.length; i++) {
             sb.append(splitName[i]);
-            if (i != splitName.length-1){
+            if (i != splitName.length - 1) {
                 sb.append(System.lineSeparator());
             }
         }
