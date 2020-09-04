@@ -39,5 +39,4 @@ public class CreatureTest {
         assertEquals(100,attacker.getCurrentHp());
         assertEquals(100,attacker.getAmount());
     }
-
 }
