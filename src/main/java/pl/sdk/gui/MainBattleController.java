@@ -21,10 +21,10 @@ public class MainBattleController {
     private Button passButton;
 
     public MainBattleController() {
-        Creature c1 = new Creature(100,30, 5, "Air Elemental",7,5);
-        Creature c2 = new Creature(100,30, 5, "Water Elemental",7,5);
-        Creature c3 = new Creature(100,30, 5, "Earth Elemental",7,5);
-        Creature c4 = new Creature(100,30, 5, "Fire Elemental",7,5);
+        Creature c1 = new ElementalCreature(100,30, 5, "Air Elemental",7,5);
+        Creature c2 = new ElementalCreature(100,30, 5, "Water Elemental",7,5);
+        Creature c3 = new ElementalCreature(100,30, 5, "Earth Elemental",7,5);
+        Creature c4 = new ElementalCreature(100,30, 5, "Fire Elemental",7,5);
 
         board.put(new Point(0,8),c1);
         board.put(new Point(14,8),c2);

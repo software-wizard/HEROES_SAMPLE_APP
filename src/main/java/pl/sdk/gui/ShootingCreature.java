@@ -10,4 +10,9 @@ public class ShootingCreature extends Creature {
     protected void ca(Creature aDefender) {
         
     }
+
+    @Override
+    protected int considerSpecialMechanic(Creature aDefender, Creature aAttacker, int damageToDeal) {
+        return damageToDeal;
+    }
 }

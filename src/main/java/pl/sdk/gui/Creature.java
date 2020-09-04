@@ -1,7 +1,7 @@
 package pl.sdk.gui;
 
 
-public class Creature {
+public abstract class Creature {
 
     private final int maxHp;
     private final Integer attack;
@@ -22,10 +22,14 @@ public class Creature {
         amount = aAmount;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void attack(Creature aDefender) {
         if (isAlive()) {
             int damageToDeal = countDamageToDeal(aDefender, this);
-            damageToDeal = considerElementalMechanic(aDefender, this, damageToDeal);
+            damageToDeal = considerSpecialMechanic(aDefender, this, damageToDeal);
             applyDamage(aDefender, damageToDeal);
 
             ca(aDefender);
@@ -35,7 +39,7 @@ public class Creature {
     protected void ca(Creature aDefender) {
         if (canCounterAttack(aDefender)) {
             int damageToDealInCounterAttack = countDamageToDeal(this, aDefender);
-            damageToDealInCounterAttack = considerElementalMechanic(this, aDefender, damageToDealInCounterAttack);
+            damageToDealInCounterAttack = considerSpecialMechanic(this, aDefender, damageToDealInCounterAttack);
             applyDamage(this, damageToDealInCounterAttack);
             aDefender.counterAttack = true;
         }
@@ -52,34 +56,7 @@ public class Creature {
         aDefender.currentHp = aDefender.currentHp - lostHp;
     }
 
-    private int considerElementalMechanic(Creature aDefender, Creature aAttacker, int damageToDeal) {
-        if (aAttacker.name.equals("Water Elemental")) {
-            if (aDefender.name.equals("Fire Elemental")) {
-                damageToDeal = damageToDeal * 2;
-            } else if (aDefender.name.equals("Earth Elemental")) {
-                damageToDeal = (int) Math.round(damageToDeal * 0.5);
-            }
-        } else if (aAttacker.name.equals("Fire Elemental")) {
-            if (aDefender.name.equals("Air Elemental")) {
-                damageToDeal = damageToDeal * 2;
-            } else if (aDefender.name.equals("Water Elemental")) {
-                damageToDeal = (int) Math.round(damageToDeal * 0.5);
-            }
-        } else if (aAttacker.name.equals("Air Elemental")) {
-            if (aDefender.name.equals("Earth Elemental")) {
-                damageToDeal = damageToDeal * 2;
-            } else if (aDefender.name.equals("Fire Elemental")) {
-                damageToDeal = (int) Math.round(damageToDeal * 0.5);
-            }
-        } else if (aAttacker.name.equals("Earth Elemental")) {
-            if (aDefender.name.equals("Water Elemental")) {
-                damageToDeal = damageToDeal * 2;
-            } else if (aDefender.name.equals("Air Elemental")) {
-                damageToDeal = (int) Math.round(damageToDeal * 0.5);
-            }
-        }
-        return damageToDeal;
-    }
+    protected abstract int considerSpecialMechanic(Creature aDefender, Creature aAttacker, int damageToDeal);
 
     private int countDamageToDeal(Creature aDefender, Creature aAttacker) {
         int damageToDeal = (aAttacker.attack - aDefender.armor) * aAttacker.amount;
