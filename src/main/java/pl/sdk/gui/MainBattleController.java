@@ -21,7 +21,7 @@ public class MainBattleController {
     private Button passButton;
 
     public MainBattleController() {
-        Creature c1 = new Creature(100,30, 5, "Air Elemental",7,5);
+        Creature c1 = new Creature(100, 30, 5, "Air Elemental", 7, 5);
         Creature c2 = new Creature(100,30, 5, "Water Elemental",7,5);
         Creature c3 = new Creature(100,30, 5, "Earth Elemental",7,5);
         Creature c4 = new Creature(100,30, 5, "Fire Elemental",7,5);
