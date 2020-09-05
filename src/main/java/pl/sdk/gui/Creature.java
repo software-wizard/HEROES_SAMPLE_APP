@@ -11,6 +11,7 @@ public class Creature {
     private int amount;
     private final int moveRange;
     private boolean counterAttack;
+    private Geberish geberish;
 
     public Creature(int aMaxHp, Integer aAttack, Integer aArmor, String aName, int aMoveRange, int aAmount) {
         maxHp = aMaxHp;
@@ -20,12 +21,17 @@ public class Creature {
         name = aName;
         moveRange = aMoveRange;
         amount = aAmount;
+        geberish = new Geberish();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void attack(Creature aDefender) {
         if (isAlive()) {
             int damageToDeal = countDamageToDeal(aDefender, this);
-            damageToDeal = considerElementalMechanic(aDefender, this, damageToDeal);
+            damageToDeal = geberish.considerSpecialMechanic(this, aDefender, damageToDeal);
             applyDamage(aDefender, damageToDeal);
 
             ca(aDefender);
@@ -35,7 +41,7 @@ public class Creature {
     protected void ca(Creature aDefender) {
         if (canCounterAttack(aDefender)) {
             int damageToDealInCounterAttack = countDamageToDeal(this, aDefender);
-            damageToDealInCounterAttack = considerElementalMechanic(this, aDefender, damageToDealInCounterAttack);
+            damageToDealInCounterAttack = geberish.considerSpecialMechanic(aDefender, this, damageToDealInCounterAttack);
             applyDamage(this, damageToDealInCounterAttack);
             aDefender.counterAttack = true;
         }
@@ -50,35 +56,6 @@ public class Creature {
         int lostHp = damageToDeal % aDefender.maxHp;
         aDefender.amount = aDefender.amount - killedUnits;
         aDefender.currentHp = aDefender.currentHp - lostHp;
-    }
-
-    private int considerElementalMechanic(Creature aDefender, Creature aAttacker, int damageToDeal) {
-        if (aAttacker.name.equals("Water Elemental")) {
-            if (aDefender.name.equals("Fire Elemental")) {
-                damageToDeal = damageToDeal * 2;
-            } else if (aDefender.name.equals("Earth Elemental")) {
-                damageToDeal = (int) Math.round(damageToDeal * 0.5);
-            }
-        } else if (aAttacker.name.equals("Fire Elemental")) {
-            if (aDefender.name.equals("Air Elemental")) {
-                damageToDeal = damageToDeal * 2;
-            } else if (aDefender.name.equals("Water Elemental")) {
-                damageToDeal = (int) Math.round(damageToDeal * 0.5);
-            }
-        } else if (aAttacker.name.equals("Air Elemental")) {
-            if (aDefender.name.equals("Earth Elemental")) {
-                damageToDeal = damageToDeal * 2;
-            } else if (aDefender.name.equals("Fire Elemental")) {
-                damageToDeal = (int) Math.round(damageToDeal * 0.5);
-            }
-        } else if (aAttacker.name.equals("Earth Elemental")) {
-            if (aDefender.name.equals("Water Elemental")) {
-                damageToDeal = damageToDeal * 2;
-            } else if (aDefender.name.equals("Air Elemental")) {
-                damageToDeal = (int) Math.round(damageToDeal * 0.5);
-            }
-        }
-        return damageToDeal;
     }
 
     private int countDamageToDeal(Creature aDefender, Creature aAttacker) {
