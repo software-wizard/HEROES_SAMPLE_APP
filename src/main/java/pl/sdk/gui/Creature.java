@@ -11,9 +11,13 @@ public class Creature {
     private int amount;
     private final int moveRange;
     private boolean counterAttack;
-    private Geberish geberish;
+    private DamageCalculator damageCalculator;
 
     public Creature(int aMaxHp, Integer aAttack, Integer aArmor, String aName, int aMoveRange, int aAmount) {
+        this(aMaxHp, aAttack, aArmor, aName, aMoveRange, aAmount, new DamageCalculator());
+    }
+
+    public Creature(int aMaxHp, Integer aAttack, Integer aArmor, String aName, int aMoveRange, int aAmount, DamageCalculator aDamageCalculator) {
         maxHp = aMaxHp;
         attack = aAttack;
         armor = aArmor;
@@ -21,7 +25,7 @@ public class Creature {
         name = aName;
         moveRange = aMoveRange;
         amount = aAmount;
-        geberish = new Geberish();
+        damageCalculator = aDamageCalculator;
     }
 
     public String getName() {
@@ -30,8 +34,7 @@ public class Creature {
 
     public void attack(Creature aDefender) {
         if (isAlive()) {
-            int damageToDeal = countDamageToDeal(aDefender, this);
-            damageToDeal = geberish.considerSpecialMechanic(this, aDefender, damageToDeal);
+            int damageToDeal = damageCalculator.calculateDamageToDeal(aDefender, this);
             applyDamage(aDefender, damageToDeal);
 
             ca(aDefender);
@@ -40,8 +43,7 @@ public class Creature {
 
     protected void ca(Creature aDefender) {
         if (canCounterAttack(aDefender)) {
-            int damageToDealInCounterAttack = countDamageToDeal(this, aDefender);
-            damageToDealInCounterAttack = geberish.considerSpecialMechanic(aDefender, this, damageToDealInCounterAttack);
+            int damageToDealInCounterAttack = damageCalculator.calculateDamageToDeal(this, aDefender);
             applyDamage(this, damageToDealInCounterAttack);
             aDefender.counterAttack = true;
         }
@@ -58,20 +60,20 @@ public class Creature {
         aDefender.currentHp = aDefender.currentHp - lostHp;
     }
 
-    private int countDamageToDeal(Creature aDefender, Creature aAttacker) {
-        int damageToDeal = (aAttacker.attack - aDefender.armor) * aAttacker.amount;
-        if (damageToDeal < 0) {
-            damageToDeal = 0;
-        }
-        return damageToDeal;
-    }
-
     private boolean isAlive() {
         return currentHp > 0 && amount > 0;
     }
 
     int getMoveRange() {
         return moveRange;
+    }
+
+    public Integer getAttack() {
+        return attack;
+    }
+
+    public Integer getArmor() {
+        return armor;
     }
 
     @Override
