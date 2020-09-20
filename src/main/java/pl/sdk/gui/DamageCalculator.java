@@ -1,7 +1,17 @@
 package pl.sdk.gui;
 
-public class Geberish {
-    public int considerSpecialMechanic(Creature aAttacker, Creature aDefender, int aDamageToDeal) {
+public class DamageCalculator {
+
+    public int calculateDamageToDeal(Creature aDefender, Creature aAttacker) {
+        int damageToDeal = (aAttacker.getAttack() - aDefender.getArmor()) * aAttacker.getAmount();
+        if (damageToDeal < 0) {
+            damageToDeal = 0;
+        }
+        damageToDeal = considerSpecialMechanic(aAttacker, aDefender, damageToDeal);
+        return damageToDeal;
+    }
+
+    private int considerSpecialMechanic(Creature aAttacker, Creature aDefender, int aDamageToDeal) {
         if (aAttacker.getName().equals("Water Elemental")) {
             if (aDefender.getName().equals("Fire Elemental")) {
                 aDamageToDeal = aDamageToDeal * 2;
