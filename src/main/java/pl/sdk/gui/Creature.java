@@ -11,13 +11,13 @@ public class Creature {
     private int amount;
     private final int moveRange;
     private boolean counterAttack;
-    private DamageCalculator damageCalculator;
+    private CalculateStrategy damageCalculator;
 
     public Creature(int aMaxHp, Integer aAttack, Integer aArmor, String aName, int aMoveRange, int aAmount) {
-        this(aMaxHp, aAttack, aArmor, aName, aMoveRange, aAmount, new DamageCalculator());
+        this(aMaxHp, aAttack, aArmor, aName, aMoveRange, aAmount, new DefaultCalculateStrategy());
     }
 
-    public Creature(int aMaxHp, Integer aAttack, Integer aArmor, String aName, int aMoveRange, int aAmount, DamageCalculator aDamageCalculator) {
+    public Creature(int aMaxHp, Integer aAttack, Integer aArmor, String aName, int aMoveRange, int aAmount, CalculateStrategy aDamageCalculator) {
         maxHp = aMaxHp;
         attack = aAttack;
         armor = aArmor;
@@ -43,7 +43,7 @@ public class Creature {
 
     protected void ca(Creature aDefender) {
         if (canCounterAttack(aDefender)) {
-            int damageToDealInCounterAttack = damageCalculator.calculateDamageToDeal(this, aDefender);
+            int damageToDealInCounterAttack = aDefender.damageCalculator.calculateDamageToDeal(this, aDefender);
             applyDamage(this, damageToDealInCounterAttack);
             aDefender.counterAttack = true;
         }

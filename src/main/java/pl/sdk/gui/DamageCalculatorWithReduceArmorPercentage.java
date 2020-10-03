@@ -1,6 +1,6 @@
 package pl.sdk.gui;
 
-public class DamageCalculatorWithReduceArmorPercentage extends DamageCalculator {
+public class DamageCalculatorWithReduceArmorPercentage implements CalculateStrategy {
 
     private int armorPercentageReduce;
     public DamageCalculatorWithReduceArmorPercentage(int aArmorToReduce) {
