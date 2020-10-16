@@ -25,12 +25,15 @@ public class MainBattleController {
         Creature c2 = new Creature(100,30, 5, "Water Elemental",7,5);
         Creature c3 = new Creature(100,30, 5, "Earth Elemental",7,5);
         Creature c4 = new Creature(100,30, 5, "Fire Elemental",7,5);
+        Creature beh = new Creature(160,50, 17, "Behemoth",6,6,
+                new ReduceArmorPercentageCalculateStrategy(60));
 
         board.put(new Point(0,8),c1);
         board.put(new Point(14,8),c2);
         board.put(new Point(0,3),c3);
         board.put(new Point(14,3),c4);
-        putCreaturesToQueue(List.of(c1, c2,c3,c4));
+        board.put(new Point(7,5),beh);
+        putCreaturesToQueue(List.of(c1, c2,c3,c4,beh));
     }
 // ====================================== GUI =====================================
     @FXML
