@@ -8,8 +8,6 @@ public class CreatureFactoryTest {
 
     @Test
     void shouldCreateBehemoth(){
-//        Creature beh = new Creature(160,50, 17, "Behemoth",6,6,
-//                new ReduceArmorPercentageCalculateStrategy(60));
 
         Creature beh = CreatureFactory.create("Behemoth");
 
