@@ -13,11 +13,11 @@ public class Creature {
     private boolean counterAttack;
     private CalculateStrategy damageCalculator;
 
-    public Creature(int aMaxHp, Integer aAttack, Integer aArmor, String aName, int aMoveRange, int aAmount) {
+    Creature(int aMaxHp, Integer aAttack, Integer aArmor, String aName, int aMoveRange, int aAmount) {
         this(aMaxHp, aAttack, aArmor, aName, aMoveRange, aAmount, new DefaultCalculateStrategy());
     }
 
-    public Creature(int aMaxHp, Integer aAttack, Integer aArmor, String aName, int aMoveRange, int aAmount, CalculateStrategy aDamageCalculator) {
+    Creature(int aMaxHp, Integer aAttack, Integer aArmor, String aName, int aMoveRange, int aAmount, CalculateStrategy aDamageCalculator) {
         maxHp = aMaxHp;
         attack = aAttack;
         armor = aArmor;
@@ -64,7 +64,7 @@ public class Creature {
         return currentHp > 0 && amount > 0;
     }
 
-    int getMoveRange() {
+    public int getMoveRange() {
         return moveRange;
     }
 
