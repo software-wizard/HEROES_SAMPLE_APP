@@ -1,7 +1,9 @@
 package pl.sdk.gui;
 
 
-public class Creature {
+import pl.sdk.gui.gui.GuiTileIf;
+
+public class Creature implements GuiTileIf {
 
     private final int maxHp;
     private final Integer attack;
@@ -101,5 +103,10 @@ public class Creature {
 
     int getAmount() {
         return amount;
+    }
+
+    @Override
+    public boolean isMovePossible() {
+        return false;
     }
 }

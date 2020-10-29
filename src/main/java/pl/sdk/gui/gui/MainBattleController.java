@@ -15,7 +15,7 @@ import java.util.*;
 
 public class MainBattleController {
 
-    private final Map<Point, Creature> board = new HashMap<>();
+    private final Map<Point, GuiTileIf> board = new HashMap<>();
     private Creature activeCreature;
     private final Queue<Creature> creaturesQueue = new LinkedList<>();
 
@@ -56,7 +56,7 @@ public class MainBattleController {
     }
 
     private void createTile(int aX, int aY) {
-        Creature creature = board.get(new Point(aX, aY));
+        GuiTileIf creature = board.get(new Point(aX, aY));
         MapTile tile = new MapTile("");
         if (creature != null) {
             tile.setName(creature.toString());
@@ -90,7 +90,7 @@ public class MainBattleController {
     }
 
     public void attack(int x, int y) {
-        activeCreature.attack(board.get(new Point(x, y)));
+        activeCreature.attack((Creature)board.get(new Point(x, y)));
         refreshGui();
         pass();
     }
