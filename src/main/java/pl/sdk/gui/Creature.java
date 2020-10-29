@@ -109,4 +109,9 @@ public class Creature implements GuiTileIf {
     public boolean isMovePossible() {
         return false;
     }
+
+    @Override
+    public boolean isAttackPossible() {
+        return true;
+    }
 }

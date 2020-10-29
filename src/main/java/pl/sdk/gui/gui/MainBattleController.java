@@ -36,6 +36,12 @@ public class MainBattleController {
         board.put(new Point(0,3),c3);
         board.put(new Point(14,3),c4);
         board.put(new Point(7,5),beh);
+        board.put(new Point(7,6),new LavaObstacle());
+        board.put(new Point(7,7),new RockObstacle());
+        board.put(new Point(7,8),new RockObstacle());
+        board.put(new Point(7,4),new LavaObstacle());
+        board.put(new Point(7,3),new RockObstacle());
+        board.put(new Point(7,2),new RockObstacle());
         putCreaturesToQueue(List.of(c1, c2,c3,c4,beh));
     }
 // ====================================== GUI =====================================
@@ -79,7 +85,11 @@ public class MainBattleController {
 
 // =============================== LOGIC ==============================
     public boolean isMoveAllowed(int x, int y) {
-        return !board.containsKey(new Point(x, y)) && new Point(x, y).distance(findCreaturePosition(activeCreature)) <= activeCreature.getMoveRange();
+        boolean isMovePossible = true;
+        if (board.containsKey(new Point(x, y))){
+            isMovePossible = board.get(new Point(x,y)).isMovePossible();
+        }
+        return isMovePossible && new Point(x, y).distance(findCreaturePosition(activeCreature)) <= activeCreature.getMoveRange();
     }
 
     public void move(int x, int y) {
@@ -96,7 +106,8 @@ public class MainBattleController {
     }
 
     public boolean isAttackPossible(int x, int y) {
-        return findCreaturePosition(activeCreature).distance(new Point(x, y)) == 1;
+        boolean distanceAllow = findCreaturePosition(activeCreature).distance(new Point(x, y)) == 1;
+        return distanceAllow && board.get(new Point(x,y)).isAttackPossible();
     }
 
     public void pass() {
