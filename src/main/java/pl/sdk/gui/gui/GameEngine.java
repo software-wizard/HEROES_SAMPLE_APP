@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class GameEngine {
+    public static final int BOARD_WIDTH = 14;
+    public static final int BOARD_HEIGHT = 9;
     final Map<Point, GuiTileIf> board;
     Creature activeCreature;
     final Queue<Creature> creaturesQueue = new LinkedList<>();
@@ -23,6 +25,10 @@ public class GameEngine {
 
     public boolean isMoveAllowed(int x, int y) {
         boolean isMovePossible = true;
+        if (x > BOARD_WIDTH || x < 0  || y< 0 || y > BOARD_HEIGHT){
+            return false;
+        }
+
         if (board.containsKey(new Point(x, y))) {
             isMovePossible = board.get(new Point(x, y)).isMovePossible();
         }
