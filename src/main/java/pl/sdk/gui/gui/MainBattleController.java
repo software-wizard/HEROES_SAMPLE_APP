@@ -79,35 +79,4 @@ public class MainBattleController {
         }
         gridMap.add(tile, aX, aY);
     }
-
-
-// =============================== LOGIC ==============================
-    public boolean isMoveAllowed(int x, int y) {
-        return gameEngine.isMoveAllowed(x, y);
-    }
-
-    public void move(int x, int y) {
-        gameEngine.move(x, y);
-    }
-
-    public void attack(int x, int y) {
-        gameEngine.attack(x, y);
-    }
-
-    public boolean isAttackPossible(int x, int y) {
-        return gameEngine.isAttackPossible(x, y);
-    }
-
-    public void pass() {
-        gameEngine.pass();
-    }
-
-    public void putCreaturesToQueue(List<Creature> aCreatures) {
-
-        gameEngine.putCreaturesToQueue(aCreatures);
-    }
-
-    public Point findCreaturePosition(Creature aCreature) {
-        return gameEngine.findCreaturePosition(aCreature);
-    }
 }
