@@ -10,12 +10,13 @@ import pl.sdk.gui.CreatureFactory;
 import pl.sdk.gui.MapTile;
 
 import java.awt.Point;
+import java.awt.datatransfer.SystemFlavorMap;
 import java.util.*;
 
 
 public class MainBattleController {
 
-    private final GameEngine gameEngine = new GameEngine();
+    private final GameEngine gameEngine;
 
     @FXML
     private GridPane gridMap;
@@ -29,17 +30,19 @@ public class MainBattleController {
         Creature c4 = CreatureFactory.create(CreatureFactory.WATER_ELEMENTAL);
         Creature beh = CreatureFactory.create(CreatureFactory.BEHEMOTH);
 
-        gameEngine.board.put(new Point(0,8),c1);
-        gameEngine.board.put(new Point(14,8),c2);
-        gameEngine.board.put(new Point(0,3),c3);
-        gameEngine.board.put(new Point(14,3),c4);
-        gameEngine.board.put(new Point(7,5),beh);
-        gameEngine.board.put(new Point(7,6),new LavaObstacle());
-        gameEngine.board.put(new Point(7,7),new RockObstacle());
-        gameEngine.board.put(new Point(7,8),new RockObstacle());
-        gameEngine.board.put(new Point(7,4),new LavaObstacle());
-        gameEngine.board.put(new Point(7,3),new RockObstacle());
-        gameEngine.board.put(new Point(7,2),new RockObstacle());
+        HashMap<Point,GuiTileIf> board = new HashMap<>();
+        board.put(new Point(0,8),c1);
+        board.put(new Point(14,8),c2);
+        board.put(new Point(0,3),c3);
+        board.put(new Point(14,3),c4);
+        board.put(new Point(7,5),beh);
+        board.put(new Point(7,6),new LavaObstacle());
+        board.put(new Point(7,7),new RockObstacle());
+        board.put(new Point(7,8),new RockObstacle());
+        board.put(new Point(7,4),new LavaObstacle());
+        board.put(new Point(7,3),new RockObstacle());
+        board.put(new Point(7,2),new RockObstacle());
+        gameEngine = new GameEngine(board);
     }
 // ====================================== GUI =====================================
     @FXML
