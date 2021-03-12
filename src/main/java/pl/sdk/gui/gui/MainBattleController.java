@@ -40,7 +40,6 @@ public class MainBattleController {
         gameEngine.board.put(new Point(7,4),new LavaObstacle());
         gameEngine.board.put(new Point(7,3),new RockObstacle());
         gameEngine.board.put(new Point(7,2),new RockObstacle());
-        gameEngine.putCreaturesToQueue(List.of(c1, c2, c3, c4, beh));
     }
 // ====================================== GUI =====================================
     @FXML

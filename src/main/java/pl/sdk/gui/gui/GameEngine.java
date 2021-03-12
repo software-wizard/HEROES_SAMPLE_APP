@@ -5,14 +5,21 @@ import pl.sdk.gui.Creature;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameEngine {
-    final Map<Point, GuiTileIf> board = new HashMap<>();
+    final Map<Point, GuiTileIf> board;
     Creature activeCreature;
     final Queue<Creature> creaturesQueue = new LinkedList<>();
 
     public GameEngine() {
-    }// =============================== LOGIC ==============================
+        this(new HashMap<>());
+    }
+
+    public GameEngine(Map<Point, GuiTileIf> aBoard){
+        board = aBoard;
+        putCreaturesToQueue(aBoard.values().stream().filter(Creature.class::isInstance).map(Creature.class::cast).collect(Collectors.toList()));
+    }
 
     public boolean isMoveAllowed(int x, int y) {
         boolean isMovePossible = true;
