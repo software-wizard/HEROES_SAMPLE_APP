@@ -48,6 +48,7 @@ public class MainBattleController {
         refreshGui();
         passButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             gameEngine.pass();
+            refreshGui();
         });
     }
 
@@ -69,13 +70,19 @@ public class MainBattleController {
             }
             if (gameEngine.isAttackPossible(aX, aY)) {
                 tile.setBackground(Color.RED);
-                tile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> gameEngine.attack(aX, aY));
+                tile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                    gameEngine.attack(aX, aY);
+                    refreshGui();
+                });
             }
         }
 
         if (gameEngine.isMoveAllowed(aX, aY)) {
             tile.setBackground(Color.GRAY);
-            tile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> gameEngine.move(aX, aY));
+            tile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                gameEngine.move(aX, aY);
+                refreshGui();
+            });
         }
         gridMap.add(tile, aX, aY);
     }
